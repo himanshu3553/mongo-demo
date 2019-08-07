@@ -25,9 +25,9 @@ const Course = mongoose.model('Course', courseSchema);
 async function createCourse() {
     // making instance of created model to be saved into database. 
     const course = new Course({
-        name: "NodeJS Course",
+        name: "Angular Course",
         author: "Himanshu",
-        tags: ['nodejs', 'expressjs'],
+        tags: ['angular', 'angularjs'],
         isPublished: true
     });
 
@@ -38,7 +38,29 @@ async function createCourse() {
 }
 
 // calling function to create a new course
-createCourse(); 
+// createCourse();
+
+// get all the courses
+// async function getCourses() {
+//     const courses = await Course.find();
+//     console.log(courses);
+// }
+
+// get all the courses with specific filters
+// async function getCourses() {
+//     const courses = await Course.find({name: 'Angular Course'});
+//     console.log(courses);
+// }
+
+// get all the courses with specific filters, limit and sorting.
+// 1 means ascending order and -1 for descending order.
+// select is used for selecting specific properties. 
+async function getCourses() {
+    const courses = await Course.find({name: 'Angular Course'}).limit(10).sort({name:1}).select({name : 1, tags : 1}) ;
+    console.log(courses);
+}
+
+getCourses();
 
 
 
